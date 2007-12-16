@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.hamcrest.Matcher;
 
-public class Selector {
+public class CollectionFunctions {
 
    private static final ThreadLocal<Iterable<?>> localItems = new ThreadLocal<Iterable<?>>();
 
