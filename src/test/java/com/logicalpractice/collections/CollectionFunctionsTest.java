@@ -1,9 +1,9 @@
 package com.logicalpractice.collections;
 
 import static com.logicalpractice.collections.CollectionUtils.typedList;
-import static com.logicalpractice.collections.Selector.from;
-import static com.logicalpractice.collections.Selector.select;
-import static com.logicalpractice.collections.Selector.where;
+import static com.logicalpractice.collections.CollectionFunctions.from;
+import static com.logicalpractice.collections.CollectionFunctions.select;
+import static com.logicalpractice.collections.CollectionFunctions.where;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
 
@@ -15,7 +15,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class SelectorTest {
+public class CollectionFunctionsTest {
 
    List<Person> testData = Arrays.asList(new Person("Billy", "Smith"),
          new Person("Billy", "Jones"), new Person("James", "Smith"));
