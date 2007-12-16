@@ -16,7 +16,7 @@ public class Selector {
 
       for (T item : items) {
          try {
-            if (matcher.matches(script.evalate(item))) {
+            if (matcher.matches(script.evaluate(item))) {
                result.add(item);
             }
          } catch (RuntimeException e) {
@@ -63,10 +63,12 @@ public class Selector {
       }
    }
 
+   @SuppressWarnings("cast")
    public final static <T> T where(Class<T> cls) {
       return (T) MethodCapture.capture(cls);
    }
 
+   @SuppressWarnings("cast")
    public final static <T> T from(Iterable<T> items) {
       Class<T> type = typeOfIterable(items);
       localItems.set(items);
