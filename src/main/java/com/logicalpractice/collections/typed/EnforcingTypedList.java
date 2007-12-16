@@ -1,4 +1,4 @@
-package com.logicalpractice.collections;
+package com.logicalpractice.collections.typed;
 
 import static com.logicalpractice.collections.CollectionUtils.checkType;
 import static com.logicalpractice.collections.CollectionUtils.checkTypesOf;

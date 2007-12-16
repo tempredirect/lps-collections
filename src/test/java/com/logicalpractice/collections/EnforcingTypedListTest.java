@@ -11,6 +11,9 @@ import java.util.ListIterator;
 
 import org.junit.Test;
 
+import com.logicalpractice.collections.typed.EnforcingTypedList;
+import com.logicalpractice.collections.typed.Typed;
+
 @SuppressWarnings("unchecked")
 public class EnforcingTypedListTest {
 

@@ -7,6 +7,10 @@ import java.util.List;
 
 import org.hamcrest.Matcher;
 
+import com.logicalpractice.collections.support.CapturingProxy;
+import com.logicalpractice.collections.support.MethodCapture;
+import com.logicalpractice.collections.typed.Typed;
+
 public class CollectionFunctions {
 
    private static final ThreadLocal<Iterable<?>> localItems = new ThreadLocal<Iterable<?>>();

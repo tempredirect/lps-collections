@@ -1,4 +1,4 @@
-package com.logicalpractice.collections;
+package com.logicalpractice.collections.support;
 
 import static java.lang.Thread.currentThread;
 import static java.lang.reflect.Modifier.isFinal;

@@ -3,7 +3,7 @@
  *
  * All rights reserved Logical Practice Systems Limited 2007
  */
-package com.logicalpractice.collections;
+package com.logicalpractice.collections.typed;
 
 import java.util.Set;
 

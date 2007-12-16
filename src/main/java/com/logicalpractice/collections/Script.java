@@ -1,5 +1,7 @@
 package com.logicalpractice.collections;
 
+import com.logicalpractice.collections.support.CapturingProxy;
+
 import net.sf.cglib.proxy.Enhancer;
 
 /**

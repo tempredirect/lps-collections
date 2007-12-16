@@ -1,4 +1,5 @@
-package com.logicalpractice.collections;
+package com.logicalpractice.collections.support;
+
 
 import net.sf.cglib.proxy.Enhancer;
 
@@ -13,7 +14,7 @@ public class MethodCapture {
       return (T) Enhancer.create(cls, context.get());      
    }
    
-   final static CapturingProxy<?> clearAndReturn(){
+   public final static CapturingProxy<?> clearAndReturn(){
       CapturingProxy<?> capture = context.get();
       context.set(null);
       return capture ;
