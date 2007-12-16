@@ -59,9 +59,8 @@ public class CapturingProxy<T> implements MethodInterceptor {
       Class<?> returnType = method.getReturnType();
       if (!isFinal(returnType.getModifiers())) {
          return Enhancer.create(method.getReturnType(), this);
-      } else {
-         return null;
       }
+      return null;
    }
 
    @SuppressWarnings("unchecked")
