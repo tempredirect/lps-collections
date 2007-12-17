@@ -6,7 +6,6 @@
 package com.logicalpractice.collections.typed;
 
 import java.util.Collection;
-import java.util.Iterator;
 
 /**
  * Collection wrapper that implements Typed&lt;T&gt;.
@@ -15,16 +14,12 @@ import java.util.Iterator;
  * 
  * @author gareth
  */
-public class TypedCollection<T> implements Collection<T>,Typed<T> {
+public class TypedCollection<T> extends TypedIterable<T> implements Collection<T> {
    private final Collection<T> delegate;
-   private final Class<T> type ;
    
    public TypedCollection(Collection<T> delegate, Class<T> type) {
-      if( delegate == null || type == null ){
-         throw new IllegalArgumentException("both parameters are required to be not null");
-      }
+      super(delegate,type);
       this.delegate = delegate;
-      this.type = type ;
    }
 
    public boolean add(T o) {
@@ -51,10 +46,6 @@ public class TypedCollection<T> implements Collection<T>,Typed<T> {
       return delegate.isEmpty();
    }
 
-   public Iterator<T> iterator() {
-      return delegate.iterator();
-   }
-
    public boolean remove(Object o) {
       return delegate.remove(o);
    }
@@ -79,30 +70,4 @@ public class TypedCollection<T> implements Collection<T>,Typed<T> {
    public <T> T[] toArray(T[] a) {
       return delegate.toArray(a);
    }
-
-   /* (non-Javadoc)
-    * @see com.logicalpractice.collections.Typed#type()
-    */
-   public final Class<T> type() {
-      return type;
-   }
-
-   /**
-    * forwards directly to the underlying collection. 
-    * Therefore two TypedList's with different type information will still be
-    * the same if the equals method of the underlying list returns true.
-    */
-   @Override
-   public boolean equals(Object o) {
-      return delegate.equals(o);
-   }
-
-   /**
-    * Delegated directly to the underlying list.
-    */
-   @Override
-   public int hashCode() {
-      return delegate.hashCode();
-   }
-   
 }

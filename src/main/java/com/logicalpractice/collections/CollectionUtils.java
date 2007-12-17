@@ -6,9 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import com.logicalpractice.collections.typed.TypedCollection;
-import com.logicalpractice.collections.typed.TypedList;
-import com.logicalpractice.collections.typed.TypedSet;
+import com.logicalpractice.collections.typed.*;
 
 /**
  * Util functions for wrapping collections in Typed collection interfaces.
@@ -33,6 +31,10 @@ public class CollectionUtils {
       }
    }
 
+   public static final <T> Iterable<T> typed(Iterable<T> iterable, Class<T> type){
+      return new TypedIterable<T>(iterable, type);
+   }
+   
    public static final <T> List<T> typedList(List<T> list, Class<T> type) {
       return new TypedList<T>(list, type);
    }
