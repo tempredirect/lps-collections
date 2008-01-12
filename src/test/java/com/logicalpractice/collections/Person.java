@@ -5,6 +5,8 @@ public class Person {
    private String firstName ;
    private String lastName ;
    
+   private Address address = new Address();
+   
    public Person(){
       //
    }
@@ -29,6 +31,10 @@ public class Person {
 
    public void setLastName(String lastName) {
       this.lastName = lastName;
+   }
+
+   public Address getAddress() {
+      return address;
    }
    
 }
