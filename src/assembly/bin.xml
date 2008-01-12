@@ -33,5 +33,9 @@
 				<include>*.jar</include>
 			</includes>
 		</fileSet>
+    <fileSet>
+      <directory>src</directory>
+      <useDefaultExcludes>true</useDefaultExcludes>
+    </fileSet>		
 	</fileSets>
 </assembly>
