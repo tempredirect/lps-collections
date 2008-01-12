@@ -1,8 +1,8 @@
 package com.logicalpractice.collections;
 
 import static java.util.Arrays.asList;
-import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 import java.util.Arrays;
@@ -77,7 +77,7 @@ public class EnforcingTypedListTest {
    public void testSubList() {
       List sublist = testObject.subList(0, 2);
       assertThat(sublist, is(EnforcingTypedList.class));
-      assertThat(((Typed)sublist).type(), equalTo(String.class));
+      assertThat(((Typed)sublist).type().getName(), equalTo(String.class.getName()));
    }
 
 }
