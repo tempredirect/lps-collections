@@ -25,7 +25,7 @@
 
 	<scm>
 		<connection>
-			https://logicalpractice-collections.googlecode.com/svn/trunk
+			scm:svn:https://logicalpractice-collections.googlecode.com/svn/trunk
 		</connection>
 	</scm>
 
