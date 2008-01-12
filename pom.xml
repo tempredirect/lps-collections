@@ -7,6 +7,27 @@
 	<artifactId>logicalpractice-collections</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
+	<name>logicalpractice collections</name>
+	<description>
+		Inspired by the hamcrest library and the hamcrest-collections
+		library, logicalpractice-collections attempts to implement a
+		more flexiable and powerful collection tools.
+	</description>
+
+	<licenses>
+		<license>
+			<name>The BSD License</name>
+			<url>
+				http://www.opensource.org/licenses/bsd-license.php
+			</url>
+		</license>
+	</licenses>
+
+	<scm>
+		<connection>
+			https://logicalpractice-collections.googlecode.com/svn/trunk
+		</connection>
+	</scm>
 
 	<build>
 		<plugins>
@@ -21,11 +42,12 @@
 
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<configuration> 
+				<configuration>
 					<descriptors>
-						<descriptorRef>
-							jar-with-dependencies
-						</descriptorRef>
+						<descriptor>src/assembly/bin.xml</descriptor>
+						<descriptor>
+							src/assembly/project.xml
+						</descriptor>
 					</descriptors>
 				</configuration>
 			</plugin>
