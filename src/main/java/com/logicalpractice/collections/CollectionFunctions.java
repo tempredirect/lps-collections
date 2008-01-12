@@ -15,7 +15,7 @@ import com.logicalpractice.collections.typed.Typed;
  * Main set of utility functions for Collections.
  * <p>
  * There are two groups of methods, first is the actual utility methods, such as
- * {@link #select(Object, Matcher) select()} and {@link #map(Object)} and the
+ * {@link #select(Object, Matcher) select()} and {@link #collect(Object)} and the
  * the support methods such as {@link #where(Class)} and {@link #from(Iterable)}
  * with can only be used in combination with the utility methods.
  * </p>
@@ -225,9 +225,19 @@ public class CollectionFunctions {
       return result;
    }
 
-   public static <T, V> List<V> collect(Iterable<T> items, V byclause) {
+   /**
+    * 
+    * @param <T>
+    * @param <V>
+    * @param items
+    * @param fromclause should be used as from(YourClass.class).getProperty() the actual value 
+    *                   past in is ignored.
+    * @return a list of transformed values, the order of the elements will be in
+    *         iteration order of the source list.
+    */
+   public static <T, V> List<V> collect(Iterable<T> items, V fromclause) {
       List<V> result = new LinkedList<V>();
-      CapturingProxy<V> proxy = getCurrentCapture(byclause);
+      CapturingProxy<V> proxy = getCurrentCapture(fromclause);
 
       for (T item : items) {
          try {
