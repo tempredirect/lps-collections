@@ -204,6 +204,11 @@ public class CollectionFunctions {
     * Maps one collection to another new collection using the Script to
     * transform each value in the source collection into a value in 
     * the destination.
+    * <pre>
+    *    List<String> names = collect(people, new Script<String>(){{
+    *          each(Person.class).getFullName();
+    *      }}
+    * </pre>
     * @param <T> Type of the source list
     * @param <V> type of the destination list
     * @param items Non-null Source collection
@@ -226,7 +231,10 @@ public class CollectionFunctions {
    }
 
    /**
-    * 
+    * Collects a List of values from an Iterable. The values and type of the result are 
+    * controlled by the fromclause.<br/>
+    * <pre>
+    * </pre>
     * @param <T>
     * @param <V>
     * @param items
