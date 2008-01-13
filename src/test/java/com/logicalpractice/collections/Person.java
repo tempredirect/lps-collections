@@ -37,4 +37,7 @@ public class Person {
       return address;
    }
    
+   public String getFullName(){
+      return getFirstName() + " " + getLastName() ;
+   }
 }
