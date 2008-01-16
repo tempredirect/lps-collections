@@ -2,19 +2,26 @@ package com.logicalpractice.collections;
 
 public class Person {
 
-   private String firstName ;
-   private String lastName ;
-   
+   private String firstName;
+   private String lastName;
+
    private Address address = new Address();
-   
-   public Person(){
+
+   private int age;
+
+   public Person() {
       //
    }
-   
+
    public Person(String firstName, String lastName) {
+      this(firstName, lastName, 0);
+   }
+
+   public Person(String firstName, String lastName, int age) {
       super();
       this.firstName = firstName;
       this.lastName = lastName;
+      this.age = age ;
    }
 
    public String getFirstName() {
@@ -36,8 +43,16 @@ public class Person {
    public Address getAddress() {
       return address;
    }
-   
-   public String getFullName(){
-      return getFirstName() + " " + getLastName() ;
+
+   public String getFullName() {
+      return getFirstName() + " " + getLastName();
+   }
+
+   public int getAge() {
+      return age;
+   }
+
+   public void setAge(int age) {
+      this.age = age;
    }
 }
