@@ -13,9 +13,9 @@ import com.logicalpractice.collections.typed.*;
  *
  * @author gareth
  */
-public class CollectionUtils {
+public class TypedUtils {
 
-   private CollectionUtils() {
+   private TypedUtils() {
       // prevent construction
    }
 

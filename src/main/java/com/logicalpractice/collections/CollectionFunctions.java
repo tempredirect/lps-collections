@@ -396,7 +396,7 @@ public class CollectionFunctions {
       Iterator<T> it = items.iterator();
 
       if (!it.hasNext()) {
-         throw new IllegalArgumentException("Unable to use from() clause on empty collections");
+         throw new IllegalArgumentException("Unable to use from() clause on empty untyped collections");
       }
 
       return (Class<T>) it.next().getClass();

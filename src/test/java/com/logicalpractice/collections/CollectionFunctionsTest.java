@@ -5,7 +5,7 @@ import static com.logicalpractice.collections.CollectionFunctions.collect;
 import static com.logicalpractice.collections.CollectionFunctions.from;
 import static com.logicalpractice.collections.CollectionFunctions.select;
 import static com.logicalpractice.collections.CollectionFunctions.where;
-import static com.logicalpractice.collections.CollectionUtils.typedList;
+import static com.logicalpractice.collections.TypedUtils.typedList;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.equalTo;

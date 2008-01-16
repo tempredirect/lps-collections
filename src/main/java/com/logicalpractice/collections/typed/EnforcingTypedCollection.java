@@ -5,8 +5,8 @@
  */
 package com.logicalpractice.collections.typed;
 
-import static com.logicalpractice.collections.CollectionUtils.checkType;
-import static com.logicalpractice.collections.CollectionUtils.checkTypesOf;
+import static com.logicalpractice.collections.TypedUtils.checkType;
+import static com.logicalpractice.collections.TypedUtils.checkTypesOf;
 
 import java.util.Collection;
 
