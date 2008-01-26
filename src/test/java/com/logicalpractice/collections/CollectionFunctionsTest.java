@@ -22,7 +22,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.junit.After;
 import org.junit.Test;
+
+import com.logicalpractice.collections.support.MethodCapture;
 
 public class CollectionFunctionsTest {
 
@@ -150,16 +153,23 @@ public class CollectionFunctionsTest {
       assertThat(workingAgeAdults.isEmpty(), equalTo(false));
    }
 
-   @Test(expected=NullPointerException.class)
+   @Test(expected = NullPointerException.class)
    public void verifyNullPointerThrown() throws Exception {
-      select(testData, where(Person.class).getFirstName().substring(0,1), equalTo("s"));      
+      select(testData, where(Person.class).getFirstName()
+            .substring(0, 1), equalTo("s"));
    }
-   
+
+   @Test
    public void collectFromOperation() {
       List<String> result = collect(from(testData).getLastName());
 
       assertThat(result, not(nullValue()));
       assertThat(result, hasItems("Smith", "Jones"));
       assertThat(result.size(), equalTo(3));
+   }
+
+   @After
+   public void clearAndReturn() {
+      MethodCapture.clearAndReturn();
    }
 }
