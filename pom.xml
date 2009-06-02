@@ -59,27 +59,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<configuration>
-					<descriptors>
-						<descriptor>src/assembly/bin.xml</descriptor>
-						<descriptor>
-							src/assembly/project.xml
-						</descriptor>
-					</descriptors>
-				</configuration>
-				<executions>
-					<execution>
-						<id>make-assembly</id><!-- this is used for inheritance merges -->
-						<phase>package</phase><!-- append to the packaging phase. -->
-						<goals>
-							<goal>attached</goal><!-- goals == mojos -->
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
 <!--		<extensions>
 			<extension>
@@ -129,4 +108,34 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<profiles>
+	    <profile>
+	        <id>assembly</id>
+	        <build>
+	            <plugins>
+        			<plugin>
+        				<artifactId>maven-assembly-plugin</artifactId>
+        				<configuration>
+        					<descriptors>
+        						<descriptor>src/assembly/bin.xml</descriptor>
+        						<descriptor>
+        							src/assembly/project.xml
+        						</descriptor>
+        					</descriptors>
+        				</configuration>
+        				<executions>
+        					<execution>
+        						<id>make-assembly</id><!-- this is used for inheritance merges -->
+        						<phase>package</phase><!-- append to the packaging phase. -->
+        						<goals>
+        							<goal>attached</goal><!-- goals == mojos -->
+        						</goals>
+        					</execution>
+        				</executions>
+        			</plugin>
+	               
+	            </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
