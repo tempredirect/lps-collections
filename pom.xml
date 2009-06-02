@@ -24,7 +24,19 @@
 		<connection>scm:svn:https://logicalpractice-collections.googlecode.com/svn/trunk</connection>
 		<developerConnection>scm:svn:https://logicalpractice-collections.googlecode.com/svn/trunk</developerConnection>
 	</scm>
-
+	<distributionManagement>
+		<repository>
+			<id>googlecode</id>
+			<uniqueVersion>false</uniqueVersion>
+			<url>dav:https://logicalpractice-collections.googlecode.com/svn/repo</url>			
+		</repository>
+        <snapshotRepository>
+            <id>googlecode-snapshots</id>
+            <url>dav:https://logicalpractice-collections.googlecode.com/svn/repo</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>		
+	</distributionManagement>
+		
 	<build>
 		<plugins>
 			<plugin>
@@ -70,6 +82,20 @@
 				</executions>
 			</plugin>
 		</plugins>
+<!--		<extensions>
+			<extension>
+				<groupId>org.jvnet.wagon-svn</groupId>
+				<artifactId>wagon-svn</artifactId>
+				<version>1.8</version>
+			</extension>
+		</extensions>		-->
+	    <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-webdav</artifactId>
+                <version>1.0-beta-2</version>
+            </extension>
+        </extensions>	
 	</build>
 
 	<reporting>
