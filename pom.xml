@@ -22,7 +22,6 @@
 
 	<scm>
 		<connection>scm:svn:https://logicalpractice-collections.googlecode.com/svn/trunk</connection>
-		<developerConnection>scm:svn:https://logicalpractice-collections.googlecode.com/svn/trunk</developerConnection>
 	</scm>
 	<distributionManagement>
 		<repository>
