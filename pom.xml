@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.logicalpractice</groupId>
 	<artifactId>logicalpractice-collections</artifactId>
-	<version>0.10</version>
+	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>logicalpractice collections</name>
 	<description>
@@ -21,7 +21,7 @@
 	</licenses>
 
 	<scm>
-		<connection>scm:svn:https://logicalpractice-collections.googlecode.com/svn/tags/logicalpractice-collections-0.10</connection>
+		<connection>scm:svn:https://logicalpractice-collections.googlecode.com/svn/trunk</connection>
 	</scm>
 	<distributionManagement>
 		<repository>
