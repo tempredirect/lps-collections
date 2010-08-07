@@ -51,7 +51,7 @@ public class CollectionFunctions {
     *         independant of the source items and that items will not be changed
     *         during this operation.
     */
-   public static <T, V> List<T> select(Iterable<T> items, Script<V> script, Matcher<V> matcher) {
+   public static <T, V> List<T> select(Iterable<T> items, Script<T,V> script, Matcher<V> matcher) {
       List<T> result = new LinkedList<T>();
 
       for (T item : items) {
@@ -214,7 +214,7 @@ public class CollectionFunctions {
     * @return a list of transformed values, the order of the elements will be in
     *         iteration order of the source list.
     */
-   public static <T, V> List<V> collect(Iterable<T> items, Script<V> script) {
+   public static <T, V> List<V> collect(Iterable<T> items, Script<T,V> script) {
       List<V> result = new LinkedList<V>();
 
       for (T item : items) {
@@ -264,7 +264,7 @@ public class CollectionFunctions {
       }
    }
    
-   public static <T, V> void remove(Iterable<T> items, Script<V> script, Matcher<V> matcher) {
+   public static <T, V> void remove(Iterable<T> items, Script<T,V> script, Matcher<V> matcher) {
       for (Iterator<T> it = items.iterator(); it.hasNext();) {
          T item = it.next();
          try {

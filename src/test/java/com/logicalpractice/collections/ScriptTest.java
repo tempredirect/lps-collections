@@ -11,7 +11,7 @@ public class ScriptTest {
       
       Person billy = new Person("Billy", "Smith");
       
-      Script<String> testObject = new Script<String>(){{
+      Script<Person,String> testObject = new Script<Person,String>(){{
          each(Person.class).getFirstName();
       }};
       

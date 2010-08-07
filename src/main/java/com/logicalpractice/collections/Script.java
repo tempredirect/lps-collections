@@ -19,19 +19,20 @@ import net.sf.cglib.proxy.Enhancer;
  *       }}, equalTo("Smith"));
  * </pre>
  * @author gareth
- * @param V the Type of the evaluation
+ * @param <F> From type
+ * @param <T> To Type
  */
-public abstract class Script<V> {
+public abstract class Script<F,T> {
 
-	private CapturingProxy<V> elementProxy ;
+	private CapturingProxy<T> elementProxy ;
 	
-	public V evaluate(Object object) throws Exception {
+	public T evaluate(Object object) throws Exception {
 		return elementProxy.replay(object) ;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public <T> T each(Class<T> cls){
-		elementProxy = new CapturingProxy<V>();
-		return (T) Enhancer.create(cls, elementProxy);
+	public F each(Class<F> cls){
+		elementProxy = new CapturingProxy<T>();
+		return (F) Enhancer.create(cls, elementProxy);
 	}
 }
