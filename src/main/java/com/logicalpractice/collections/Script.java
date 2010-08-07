@@ -26,13 +26,23 @@ public abstract class Script<F,T> {
 
 	private CapturingProxy<T> elementProxy ;
 	
-	public T evaluate(Object object) throws Exception {
-		return elementProxy.replay(object) ;
-	}
+	public T apply(Object object)  {
+    try {
+      return elementProxy.replay(object) ;
+    } catch (Exception e) {
+      throw new ExpressionException(e);
+    }
+  }
 	
 	@SuppressWarnings("unchecked")
 	public F each(Class<F> cls){
 		elementProxy = new CapturingProxy<T>();
 		return (F) Enhancer.create(cls, elementProxy);
 	}
+
+  private static class ExpressionException extends RuntimeException {
+    public ExpressionException(Exception e) {
+      super(e);
+    }
+  }
 }

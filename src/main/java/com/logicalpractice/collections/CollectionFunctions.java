@@ -56,7 +56,7 @@ public class CollectionFunctions {
 
       for (T item : items) {
          try {
-            if (matcher.matches(script.evaluate(item))) {
+            if (matcher.matches(script.apply(item))) {
                result.add(item);
             }
          } catch (Exception e) {
@@ -219,7 +219,7 @@ public class CollectionFunctions {
 
       for (T item : items) {
          try {
-            result.add(script.evaluate(item));
+            result.add(script.apply(item));
          } catch (Exception e) {
             launderException(e);
             assert false; // unreachable
@@ -268,7 +268,7 @@ public class CollectionFunctions {
       for (Iterator<T> it = items.iterator(); it.hasNext();) {
          T item = it.next();
          try {
-            if (matcher.matches(script.evaluate(item))) {
+            if (matcher.matches(script.apply(item))) {
                it.remove();
             }
          } catch (Exception e) {

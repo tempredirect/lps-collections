@@ -15,7 +15,7 @@ public class ScriptTest {
          each(Person.class).getFirstName();
       }};
       
-      String result = testObject.evaluate(billy);
+      String result = testObject.apply(billy);
       
       assertThat(result, equalTo("Billy"));
    }
