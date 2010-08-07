@@ -26,7 +26,7 @@ public abstract class Script<F,T> {
 
 	private CapturingProxy<T> elementProxy ;
 	
-	public T apply(Object object)  {
+	public T apply(F object)  {
     try {
       return elementProxy.replay(object) ;
     } catch (Exception e) {
