@@ -60,8 +60,7 @@ public class CollectionFunctions {
                result.add(item);
             }
          } catch (Exception e) {
-            launderException(e);
-            assert false; // unreachable
+            throw launderException(e);
          }
       }
       return result;
@@ -111,8 +110,7 @@ public class CollectionFunctions {
                result.add(item);
             }
          } catch (Exception e) {
-            launderException(e);
-            assert false;
+            throw launderException(e);
          }
       }
       return result;
@@ -144,9 +142,9 @@ public class CollectionFunctions {
     * element will be used as the prototype for CapturingProxy. An Alternative
     * is to use an implementation of {@link Typed}, Typed implementations of
     * the collection classes can be obtained with via
-    * {@link CollectionUtils.typedCollection(java.util.Collection)},
-    * {@link CollectionUtils.typedCollection(java.util.List)} and
-    * {@link CollectionUtils.typedSet(java.util.Set)}
+    * {@link TypedUtils#typedCollection(java.util.Collection)},
+    * {@link TypedUtils#typedCollection(java.util.List)} and
+    * {@link TypedUtils#typedSet(java.util.Set)}
     * </p>
     * 
     * <pre>
@@ -251,8 +249,7 @@ public class CollectionFunctions {
          try {
             result.add(proxy.replay(item));
          } catch (Exception e) {
-            launderException(e);
-            assert false;
+            throw launderException(e);
          }
       }
       return result;
@@ -275,8 +272,7 @@ public class CollectionFunctions {
                it.remove();
             }
          } catch (Exception e) {
-            launderException(e);
-            assert false; // unreachable
+            throw launderException(e);
          }
       }
    }
@@ -291,8 +287,7 @@ public class CollectionFunctions {
                it.remove();
             }
          } catch (Exception e) {
-            launderException(e);
-            assert false;
+            throw launderException(e);
          }
       }
    }
@@ -312,7 +307,7 @@ public class CollectionFunctions {
     * record the subsequent method invokations in order for them to be replayed
     * later by the {@link #select(Iterable, Object, Matcher)}.
     * <p>
-    * {@link MethodCapture.capture(cls)} provides the proxy and it in turn uses
+    * {@link com.logicalpractice.collections.support.MethodCapture#capture(java.lang.Class)} provides the proxy and it in turn uses
     * CGLIB to implement it. There are some rescitions to the use of
     * MethodCapture please refer it's documentation for more information.
     * </p>
@@ -325,7 +320,7 @@ public class CollectionFunctions {
     *            if cls is null
     */
    @SuppressWarnings("cast")
-   public final static <T> T where(Class<T> cls) {
+   public static <T> T where(Class<T> cls) {
       if (cls == null) {
          throw new IllegalArgumentException("Null cls parameter for where(Class). cls is required");
       }
@@ -341,7 +336,7 @@ public class CollectionFunctions {
     * @return Capturing instance of cls
     * @see #where(Class)
     */
-   public final static <T> T by(Class<T> cls){
+   public static <T> T by(Class<T> cls){
       return where(cls);
    }
    
@@ -383,12 +378,12 @@ public class CollectionFunctions {
    }
 
    @SuppressWarnings("unchecked")
-   private static final <V> CapturingProxy<V> getCurrentCapture(V value) {
+   private static <V> CapturingProxy<V> getCurrentCapture(V value) {
       return (CapturingProxy<V>) MethodCapture.clearAndReturn();
    }
 
    @SuppressWarnings("unchecked")
-   private static final <T> Class<T> typeOfIterable(Iterable<T> items) {
+   private static <T> Class<T> typeOfIterable(Iterable<T> items) {
       if (items instanceof Typed) {
          return ((Typed) items).type();
       }
@@ -402,17 +397,15 @@ public class CollectionFunctions {
       return (Class<T>) it.next().getClass();
    }
 
-   private static final void launderException(Exception e) {
+   private static RuntimeException launderException(Exception e) {
       if (e instanceof RuntimeException) {
-         throw (RuntimeException)e;
+         return (RuntimeException)e;
       } else if (e instanceof InvocationTargetException) {
          if (e.getCause() instanceof RuntimeException) {
-            throw (RuntimeException) e.getCause();
+            return (RuntimeException) e.getCause();
          }
-         throw new RuntimeException(e);
       }
-      throw new RuntimeException(e);
-
+      return new RuntimeException(e);
    }
 
 }
