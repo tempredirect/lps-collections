@@ -14,7 +14,7 @@ import net.sf.cglib.proxy.Enhancer;
  * </p>  
  * For example:
  * <pre>
- *    List<Person> output = Selector.select(collectionOfPeople, new Script<String>() {{
+ *    List<Person> output = Selector.select(collectionOfPeople, new Expression<String>() {{
  *          each(Person.class).getLastName();
  *       }}, equalTo("Smith"));
  * </pre>
@@ -22,7 +22,7 @@ import net.sf.cglib.proxy.Enhancer;
  * @param <F> From type
  * @param <T> To Type
  */
-public abstract class Script<F,T> {
+public abstract class Expression<F,T> {
 
 	private CapturingProxy<T> elementProxy ;
 	

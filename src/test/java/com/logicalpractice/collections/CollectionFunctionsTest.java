@@ -35,7 +35,7 @@ public class CollectionFunctionsTest {
    @Test
    public void selectAllSmiths() throws Exception {
 
-      List<Person> output = select(testData, new Script<Person,String>() {
+      List<Person> output = select(testData, new Expression<Person,String>() {
          {
             each(Person.class).getLastName();
          }
@@ -107,7 +107,7 @@ public class CollectionFunctionsTest {
    public void scriptCollectOperation() {
 
       // collects all the first names
-      List<String> result = collect(testData, new Script<Person,String>() {
+      List<String> result = collect(testData, new Expression<Person,String>() {
          {
             each(Person.class).getFirstName();
          }
@@ -122,7 +122,7 @@ public class CollectionFunctionsTest {
    public void scriptCollectOperation2() {
 
       // collects all the first names
-      List<String> result = collect(testData, new Script<Person,String>() {
+      List<String> result = collect(testData, new Expression<Person,String>() {
          {
             each(Person.class).getLastName();
          }

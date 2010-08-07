@@ -4,14 +4,14 @@ import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.* ;
 import org.junit.Test;
 
-public class ScriptTest {
+public class ExpressionTest {
 
    @Test
    public void script1() throws Exception {
       
       Person billy = new Person("Billy", "Smith");
       
-      Script<Person,String> testObject = new Script<Person,String>(){{
+      Expression<Person,String> testObject = new Expression<Person,String>(){{
          each(Person.class).getFirstName();
       }};
       
