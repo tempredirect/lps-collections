@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import org.hamcrest.Matcher;
 
 import com.logicalpractice.collections.support.CapturingProxy;
@@ -140,9 +141,9 @@ public class Selector {
     * element will be used as the prototype for CapturingProxy. An Alternative
     * is to use an implementation of {@link Typed}, Typed implementations of
     * the collection classes can be obtained with via
-    * {@link com.logicalpractice.collections.typed.TypedUtils#typedCollection(java.util.Collection)},
-    * {@link com.logicalpractice.collections.typed.TypedUtils#typedCollection(java.util.List)} and
-    * {@link com.logicalpractice.collections.typed.TypedUtils#typedSet(java.util.Set)}
+    * {@link com.logicalpractice.collections.typed.TypedUtils#typedCollection(java.util.Collection, Class)}},
+    * {@link com.logicalpractice.collections.typed.TypedUtils#typedList(java.util.List,Class)} and
+    * {@link com.logicalpractice.collections.typed.TypedUtils#typedSet(java.util.Set,Class)}
     * </p>
     * 
     * <pre>
@@ -189,7 +190,7 @@ public class Selector {
       List<T> result = new LinkedList<T>();
       
       for (T item : items) {
-         if( predicate.evaluate(item)){
+         if( predicate.apply(item)){
             result.add(item);
          }
       }

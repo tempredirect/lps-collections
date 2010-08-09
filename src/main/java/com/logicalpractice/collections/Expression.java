@@ -11,7 +11,7 @@ import net.sf.cglib.proxy.Enhancer;
  * Designed to be used in a similar manner to the <a href="http://www.jmock.org/">JMock</a> 
  * <a href="http://www.jmock.org/javadoc/2.4.0/org/jmock/Expectations.html">Expectations class</a>. 
  * The puesdo script is written in the initializer block and must call, T each(Class<T>) then record 
- * method calls on that object. The evaluate method will then replay the calls on the given object. 
+ * method calls on that object. The apply method will then replay the calls on the given object.
  * </p>  
  * For example:
  * <pre>

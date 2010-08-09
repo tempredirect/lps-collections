@@ -86,7 +86,7 @@ public class SelectorTest {
       final AtomicInteger evaluateCount = new AtomicInteger(0);
 
       Iterable<Person> result = select(testData, new Predicate<Person>() {
-         public boolean evaluate(Person p) {
+         public boolean apply(Person p) {
             evaluateCount.incrementAndGet();
             return p.getLastName()
                   .matches("[Ss]mith");
