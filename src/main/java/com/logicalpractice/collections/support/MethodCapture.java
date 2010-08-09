@@ -7,7 +7,7 @@ import net.sf.cglib.proxy.Enhancer;
 /**
  * Supplies and holds a CapturingProxy bound to the current Thread.
  * {@link #capture(Class)} uses CGLIB
- * {@link net.sf.cglib.proxy.Enhancer.create(Class,net.sf.cglib.proxy.Callback) Enchancer.create(Class,Callback)}
+ * {@link net.sf.cglib.proxy.Enhancer#create(Class,net.sf.cglib.proxy.Callback) Enchancer.create(Class,Callback)}
  * to provide the instance.
  * <br/>Class must:
  * <ul>
