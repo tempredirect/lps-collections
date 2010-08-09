@@ -7,6 +7,8 @@ import java.util.List;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.collect.AbstractIterator;
+import com.google.common.collect.Iterators;
 import org.hamcrest.Matcher;
 
 import com.logicalpractice.collections.support.CapturingProxy;
@@ -176,25 +178,21 @@ public class Selector {
       }
    }
 
-   public static <T> List<T> select(Iterable<T> items, Matcher<T> matcher){
-      List<T> result = new LinkedList<T>() ;
-      for (T item : items) {
-         if( matcher.matches(item)){
-            result.add(item);
-         }
-      }
-      return result;
+   public static <T> Iterable<T> select(Iterable<T> items, final Matcher<T> matcher){
+      return select(items, new Predicate<T>() {
+          public boolean apply(T input) {
+              return matcher.matches(input);
+          }
+      });
    }
 
-   public static <T> Iterable<T> select(Iterable<T> items, Predicate<T> predicate){
-      List<T> result = new LinkedList<T>();
-      
-      for (T item : items) {
-         if( predicate.apply(item)){
-            result.add(item);
-         }
-      }
-      return result;
+   public static <T> Iterable<T> select(final Iterable<T> items, final Predicate<T> predicate){
+       return new Iterable<T>(){
+           public Iterator<T> iterator() {
+               final Iterator<T> it = items.iterator();
+               return Iterators.filter(it, predicate);
+           }
+       };
    }
    
    /**

@@ -100,7 +100,7 @@ public class SelectorTest {
    public void simpleSelect() throws Exception {
       Integer[] values = { 1, 3, 7, 9, 11, 19 };
 
-      List<Integer> result = select(asList(values), lessThan(10));
+      Iterable<Integer> result = select(asList(values), lessThan(10));
 
       assertThat(result, not(nullValue()));
       assertThat(result, hasItems(1, 3, 7, 9));
