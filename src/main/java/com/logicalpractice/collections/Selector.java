@@ -101,7 +101,7 @@ public class Selector {
     */
    public static <T, V> Iterable<T> select(Iterable<T> items, V whereclause, Matcher<V> matcher) {
       List<T> result = new LinkedList<T>();
-      CapturingProxy<V> proxy = getCurrentCapture(whereclause);
+      CapturingProxy<T,V> proxy = getCurrentCapture(whereclause);
 
       for (T item : items) {
          try {
@@ -241,7 +241,7 @@ public class Selector {
     */
    public static <T, V> Iterable<V> collect(Iterable<T> items, V fromclause) {
       List<V> result = new LinkedList<V>();
-      CapturingProxy<V> proxy = getCurrentCapture(fromclause);
+      CapturingProxy<T,V> proxy = getCurrentCapture(fromclause);
 
       for (T item : items) {
          try {
@@ -276,7 +276,7 @@ public class Selector {
    }
    
    public static <T, V> void remove(Iterable<T> items, V whereclause, Matcher<V> matcher) {
-      CapturingProxy<V> proxy = getCurrentCapture(whereclause);
+      CapturingProxy<T,V> proxy = getCurrentCapture(whereclause);
 
       for (Iterator<T> it = items.iterator(); it.hasNext();) {
          T item = it.next();
@@ -372,8 +372,8 @@ public class Selector {
    }
 
    @SuppressWarnings("unchecked")
-   private static <V> CapturingProxy<V> getCurrentCapture(V value) {
-      return (CapturingProxy<V>) MethodCapture.clearAndReturn();
+   private static <F,V> CapturingProxy<F,V> getCurrentCapture(V value) {
+      return (CapturingProxy<F,V>) MethodCapture.clearAndReturn();
    }
 
    @SuppressWarnings("unchecked")

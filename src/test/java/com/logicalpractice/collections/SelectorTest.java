@@ -24,6 +24,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import org.junit.After;
@@ -88,8 +89,7 @@ public class SelectorTest {
       Iterable<Person> result = select(testData, new Predicate<Person>() {
          public boolean apply(Person p) {
             evaluateCount.incrementAndGet();
-            return p.getLastName()
-                  .matches("[Ss]mith");
+            return p.getLastName().matches("[Ss]mith");
          }
       });
       assertThat(size(result), equalTo(2));

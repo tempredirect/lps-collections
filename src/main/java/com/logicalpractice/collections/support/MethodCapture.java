@@ -33,7 +33,7 @@ public class MethodCapture {
    /**
     * Holder for the current CapturingProxy.
     */
-   private final static ThreadLocal<CapturingProxy<?>> context = new ThreadLocal<CapturingProxy<?>>();
+   private final static ThreadLocal<CapturingProxy<?,?>> context = new ThreadLocal<CapturingProxy<?,?>>();
 
    /**
     * Returns and starts the capture proxy.
@@ -52,13 +52,13 @@ public class MethodCapture {
       if( context.get() != null ){
          throw new IllegalStateException("An existing CapturingProxy() exists for this thread, calls to capture cannot be nested, or clearAndReturn has not been called correctly");
       }
-      context.set(new CapturingProxy<Object>());
+      context.set(new CapturingProxy<Object,Object>());
 
       return (T) Enhancer.create(cls, context.get());
    }
 
-   public final static CapturingProxy<?> clearAndReturn() {
-      CapturingProxy<?> capture = context.get();
+   public final static CapturingProxy<?,?> clearAndReturn() {
+      CapturingProxy<?,?> capture = context.get();
       context.set(null);
       return capture;
    }

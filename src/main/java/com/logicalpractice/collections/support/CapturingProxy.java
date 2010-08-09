@@ -8,13 +8,14 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.google.common.base.Function;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
-public class CapturingProxy<T> implements MethodInterceptor {
+public class CapturingProxy<F,T> implements MethodInterceptor, Function<F,T> {
 
-   private static class CapturedMethodInvocation {
+    private static class CapturedMethodInvocation {
       private final Method method;
       private final Object[] args;
 
@@ -64,11 +65,25 @@ public class CapturingProxy<T> implements MethodInterceptor {
    }
 
    @SuppressWarnings("unchecked")
-   public T replay(Object target) throws Exception {
+   public T replay(F target) throws Exception {
       Object currentTarget = target;
       for (CapturedMethodInvocation invocation : invocations) {
          currentTarget = invocation.invoke(currentTarget);
       }
       return (T) currentTarget;
    }
+
+    public T apply(F from) {
+        try {
+            return replay(from);
+        } catch (Exception e) {
+            throw new CapturingProxyException(e);
+        }
+    }
+
+    private static class CapturingProxyException extends RuntimeException {
+        public CapturingProxyException(Exception e) {
+            super(e);
+        }
+    }
 }

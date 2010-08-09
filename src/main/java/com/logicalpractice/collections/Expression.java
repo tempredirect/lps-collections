@@ -25,10 +25,10 @@ import net.sf.cglib.proxy.Enhancer;
  */
 public abstract class Expression<F,T> implements Function<F,T> {
 
-	private CapturingProxy<T> elementProxy ;
+	private CapturingProxy<F,T> elementProxy ;
 	
-	public T apply(F object)  {
-    try {
+    public T apply(F object)  {
+        try {
       return elementProxy.replay(object) ;
     } catch (Exception e) {
       throw new ExpressionException(e);
@@ -37,7 +37,7 @@ public abstract class Expression<F,T> implements Function<F,T> {
 	
 	@SuppressWarnings("unchecked")
 	public F each(Class<F> cls){
-		elementProxy = new CapturingProxy<T>();
+		elementProxy = new CapturingProxy<F,T>();
 		return (F) Enhancer.create(cls, elementProxy);
 	}
 
