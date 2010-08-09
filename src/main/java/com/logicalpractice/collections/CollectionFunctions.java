@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.google.common.base.Function;
 import org.hamcrest.Matcher;
 
 import com.logicalpractice.collections.support.CapturingProxy;
@@ -21,7 +22,7 @@ import com.logicalpractice.collections.typed.Typed;
  * </p>
  * <p>
  * Typicaly each utility method comes with three versions. In order of
- * complexity: one that accepts a {@link Expression} object, second that can be used
+ * complexity: one that accepts a {@link Function} object, second that can be used
  * in conjunction with a clause function like {@link #where(Class)}, a third
  * that seemingly doesn't even accept a collection as an argument these need to
  * be used in conjunction with a source method such as {@link #from(Iterable)}
@@ -33,7 +34,7 @@ public class CollectionFunctions {
    private static final ThreadLocal<Iterable<?>> localItems = new ThreadLocal<Iterable<?>>();
 
    /**
-    * Select matching items from Iterable items by evalulating the Expression object
+    * Select matching items from Iterable items by evalulating the Function object
     * for each element.
     * @param <T>
     *           Type of Iterable elements
@@ -41,8 +42,8 @@ public class CollectionFunctions {
     *           Type of the value used for the matcher
     * @param items
     *           None null instance of Iterable
-    * @param expression
-    *           None null instance of Expression that excepts type T and returns a
+    * @param Function
+    *           None null instance of Function that excepts type T and returns a
     *           Value of type V
     * @param matcher
     *           Hamcrest matcher that if evalulated to true will result in the
@@ -51,12 +52,12 @@ public class CollectionFunctions {
     *         independant of the source items and that items will not be changed
     *         during this operation.
     */
-   public static <T, V> List<T> select(Iterable<T> items, Expression<T,V> expression, Matcher<V> matcher) {
+   public static <T, V> List<T> select(Iterable<T> items, Function<T,V> Function, Matcher<V> matcher) {
       List<T> result = new LinkedList<T>();
 
       for (T item : items) {
          try {
-            if (matcher.matches(expression.apply(item))) {
+            if (matcher.matches(Function.apply(item))) {
                result.add(item);
             }
          } catch (Exception e) {
@@ -90,9 +91,6 @@ public class CollectionFunctions {
     *           return value from the where(ClassName.class) script like thing,
     *           the actual value isn't particalarly interesting, as it will just
     *           be thrown away.
-    * @param script
-    *           None null instance of Expression that excepts type T and returns a
-    *           Value of type V
     * @param matcher
     *           Hamcrest matcher that if evalulated to true will result in the
     *           element being returned in the result
@@ -142,9 +140,9 @@ public class CollectionFunctions {
     * element will be used as the prototype for CapturingProxy. An Alternative
     * is to use an implementation of {@link Typed}, Typed implementations of
     * the collection classes can be obtained with via
-    * {@link TypedUtils#typedCollection(java.util.Collection)},
-    * {@link TypedUtils#typedCollection(java.util.List)} and
-    * {@link TypedUtils#typedSet(java.util.Set)}
+    * {@link com.logicalpractice.collections.typed.TypedUtils#typedCollection(java.util.Collection)},
+    * {@link com.logicalpractice.collections.typed.TypedUtils#typedCollection(java.util.List)} and
+    * {@link com.logicalpractice.collections.typed.TypedUtils#typedSet(java.util.Set)}
     * </p>
     * 
     * <pre>
@@ -199,30 +197,29 @@ public class CollectionFunctions {
    }
    
    /**
-    * Maps one collection to another new collection using the Expression to
+    * Maps one collection to another new collection using the Function to
     * transform each value in the source collection into a value in 
     * the destination.
     * <pre>
-    *    List<String> names = collect(people, new Expression<String>(){{
+    *    List<String> names = collect(people, new Function<String>(){{
     *          each(Person.class).getFullName();
     *      }}
     * </pre>
     * @param <T> Type of the source list
     * @param <V> type of the destination list
     * @param items Non-null Source collection
-    * @param expression
+    * @param function
     * @return a list of transformed values, the order of the elements will be in
     *         iteration order of the source list.
     */
-   public static <T, V> List<V> collect(Iterable<T> items, Expression<T,V> expression) {
+   public static <T, V> List<V> collect(Iterable<T> items, Function<T,V> function) {
       List<V> result = new LinkedList<V>();
 
       for (T item : items) {
          try {
-            result.add(expression.apply(item));
+            result.add(function.apply(item));
          } catch (Exception e) {
-            launderException(e);
-            assert false; // unreachable
+            throw launderException(e);
          }
       }
       return result;
@@ -264,11 +261,11 @@ public class CollectionFunctions {
       }
    }
    
-   public static <T, V> void remove(Iterable<T> items, Expression<T,V> expression, Matcher<V> matcher) {
+   public static <T, V> void remove(Iterable<T> items, Function<T,V> function, Matcher<V> matcher) {
       for (Iterator<T> it = items.iterator(); it.hasNext();) {
          T item = it.next();
          try {
-            if (matcher.matches(expression.apply(item))) {
+            if (matcher.matches(function.apply(item))) {
                it.remove();
             }
          } catch (Exception e) {

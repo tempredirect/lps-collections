@@ -1,5 +1,6 @@
 package com.logicalpractice.collections;
 
+import com.google.common.base.Function;
 import com.logicalpractice.collections.support.CapturingProxy;
 
 import net.sf.cglib.proxy.Enhancer;
@@ -22,7 +23,7 @@ import net.sf.cglib.proxy.Enhancer;
  * @param <F> From type
  * @param <T> To Type
  */
-public abstract class Expression<F,T> {
+public abstract class Expression<F,T> implements Function<F,T> {
 
 	private CapturingProxy<T> elementProxy ;
 	
