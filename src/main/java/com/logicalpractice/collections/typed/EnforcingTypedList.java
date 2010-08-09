@@ -1,7 +1,7 @@
 package com.logicalpractice.collections.typed;
 
-import static com.logicalpractice.collections.TypedUtils.checkType;
-import static com.logicalpractice.collections.TypedUtils.checkTypesOf;
+import static com.logicalpractice.collections.typed.TypedUtils.checkType;
+import static com.logicalpractice.collections.typed.TypedUtils.checkTypesOf;
 
 import java.util.Collection;
 import java.util.List;
