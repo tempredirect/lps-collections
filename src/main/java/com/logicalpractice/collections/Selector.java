@@ -42,7 +42,7 @@ public class Selector {
     *           Type of the value used for the matcher
     * @param items
     *           None null instance of Iterable
-    * @param Function
+    * @param function
     *           None null instance of Function that excepts type T and returns a
     *           Value of type V
     * @param matcher
@@ -52,12 +52,12 @@ public class Selector {
     *         independant of the source items and that items will not be changed
     *         during this operation.
     */
-   public static <T, V> List<T> select(Iterable<T> items, Function<T,V> Function, Matcher<V> matcher) {
+   public static <T, V> Iterable<T> select(Iterable<T> items, Function<T,V> function, Matcher<V> matcher) {
       List<T> result = new LinkedList<T>();
 
       for (T item : items) {
          try {
-            if (matcher.matches(Function.apply(item))) {
+            if (matcher.matches(function.apply(item))) {
                result.add(item);
             }
          } catch (Exception e) {
@@ -98,7 +98,7 @@ public class Selector {
     *         independant of the source items and that items will not be changed
     *         during this operation.
     */
-   public static <T, V> List<T> select(Iterable<T> items, V whereclause, Matcher<V> matcher) {
+   public static <T, V> Iterable<T> select(Iterable<T> items, V whereclause, Matcher<V> matcher) {
       List<T> result = new LinkedList<T>();
       CapturingProxy<V> proxy = getCurrentCapture(whereclause);
 
@@ -167,7 +167,7 @@ public class Selector {
     *         during this operation.
     */
    @SuppressWarnings("unchecked")
-   public static <T, V> List<T> select(V value, Matcher<V> matcher) {
+   public static <T, V> Iterable<T> select(V value, Matcher<V> matcher) {
       try {
          return (List<T>) select(localItems.get(), value, matcher);
       } finally {
@@ -185,7 +185,7 @@ public class Selector {
       return result;
    }
 
-   public static <T> List<T> select(Iterable<T> items, Predicate<T> predicate){
+   public static <T> Iterable<T> select(Iterable<T> items, Predicate<T> predicate){
       List<T> result = new LinkedList<T>();
       
       for (T item : items) {
@@ -212,7 +212,7 @@ public class Selector {
     * @return a list of transformed values, the order of the elements will be in
     *         iteration order of the source list.
     */
-   public static <T, V> List<V> collect(Iterable<T> items, Function<T,V> function) {
+   public static <T, V> Iterable<V> collect(Iterable<T> items, Function<T,V> function) {
       List<V> result = new LinkedList<V>();
 
       for (T item : items) {
@@ -238,7 +238,7 @@ public class Selector {
     * @return a list of transformed values, the order of the elements will be in
     *         iteration order of the source list.
     */
-   public static <T, V> List<V> collect(Iterable<T> items, V fromclause) {
+   public static <T, V> Iterable<V> collect(Iterable<T> items, V fromclause) {
       List<V> result = new LinkedList<V>();
       CapturingProxy<V> proxy = getCurrentCapture(fromclause);
 
@@ -253,7 +253,7 @@ public class Selector {
    }
 
    @SuppressWarnings("unchecked")
-   public static <V> List<V> collect(V value) {
+   public static <V> Iterable<V> collect(V value) {
       try {
          return collect(localItems.get(), value);
       } finally {
@@ -353,10 +353,6 @@ public class Selector {
     * element will be used as the prototype for CapturingProxy. An Alternative
     * is to use an implementation of {@link Typed}, Typed implementations of
     * the collection classes can be obtained with via
-    * {@link CollectionUtils.typedCollection(java.util.Collection)},
-    * {@link CollectionUtils.typedCollection(java.util.List)},
-    * {@link CollectionUtils.typedSet(java.util.Set)} and
-    * {@link CollectionUtils.typed(java.lang.Iterable)}.
     * </p>
     * <p>
     * {@link MethodCapture.capture(cls)} provides the proxy and it in turn uses
