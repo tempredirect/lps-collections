@@ -7,9 +7,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
 
-public class EnforcingTypedList<T> extends TypedList<T> {
+class EnforcingTypedList<T> extends TypedList<T> {
 
-   public static class EnforcingTypedListIterator<C> extends TypedList.TypedListIterator<C> {
+   static class EnforcingTypedListIterator<C> extends TypedList.TypedListIterator<C> {
 
       protected EnforcingTypedListIterator(ListIterator<C> iterator, Class<C> type) {
          super(iterator, type);
@@ -28,7 +28,7 @@ public class EnforcingTypedList<T> extends TypedList<T> {
       }
    }
 
-   public EnforcingTypedList(List<T> delegate, Class<T> type) {
+   EnforcingTypedList(List<T> delegate, Class<T> type) {
       super(delegate, type);
    }
 

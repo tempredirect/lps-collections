@@ -14,10 +14,10 @@ import java.util.Collection;
  * 
  * @author gareth
  */
-public class TypedCollection<T> extends TypedIterable<T> implements Collection<T> {
+class TypedCollection<T> extends TypedIterable<T> implements Collection<T> {
    private final Collection<T> delegate;
    
-   public TypedCollection(Collection<T> delegate, Class<T> type) {
+   TypedCollection(Collection<T> delegate, Class<T> type) {
       super(delegate,type);
       this.delegate = delegate;
    }

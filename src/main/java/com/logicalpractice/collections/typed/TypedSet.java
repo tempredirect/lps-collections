@@ -11,13 +11,13 @@ import java.util.Set;
  * Set wrapper class that provides runtime type information.
  * @author gareth
  */
-public class TypedSet<T> extends TypedCollection<T> implements Set<T> {
+class TypedSet<T> extends TypedCollection<T> implements Set<T> {
 
    /**
     * @param delegate
     * @param type
     */
-   public TypedSet(Set<T> delegate, Class<T> type) {
+   TypedSet(Set<T> delegate, Class<T> type) {
       super(delegate, type);
    }
 }

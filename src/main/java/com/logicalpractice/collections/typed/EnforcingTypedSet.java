@@ -10,13 +10,13 @@ import java.util.Collection;
 /**
  * @author gareth
  */
-public class EnforcingTypedSet<T> extends EnforcingTypedCollection<T> {
+class EnforcingTypedSet<T> extends EnforcingTypedCollection<T> {
 
    /**
     * @param delegate
     * @param type
     */
-   public EnforcingTypedSet(Collection<T> delegate, Class<T> type) {
+   EnforcingTypedSet(Collection<T> delegate, Class<T> type) {
       super(delegate, type);
    }
 }

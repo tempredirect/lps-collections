@@ -1,4 +1,4 @@
-package com.logicalpractice.collections;
+package com.logicalpractice.collections.typed;
 
 import static org.junit.Assert.*;
 

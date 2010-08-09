@@ -10,7 +10,7 @@ import java.util.Iterator;
 /**
  * @author gareth
  */
-public class TypedIterable<T> implements Iterable<T>, Typed<T> {
+class TypedIterable<T> implements Iterable<T>, Typed<T> {
 
    private final Iterable<T> delegate ;
    private final Class<T> type ;
@@ -19,7 +19,7 @@ public class TypedIterable<T> implements Iterable<T>, Typed<T> {
     * @param delegate
     * @param type
     */
-   public TypedIterable(Iterable<T> delegate, Class<T> type) {
+   TypedIterable(Iterable<T> delegate, Class<T> type) {
       if( delegate == null || type == null ){
          throw new IllegalArgumentException("both parameters are required to be not null");
       }

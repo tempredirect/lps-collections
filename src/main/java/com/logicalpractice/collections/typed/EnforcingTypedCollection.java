@@ -13,7 +13,7 @@ import java.util.Collection;
 /**
  * @author gareth
  */
-public class EnforcingTypedCollection<T> extends TypedCollection<T> {
+class EnforcingTypedCollection<T> extends TypedCollection<T> {
 
    /**
     * @param delegate

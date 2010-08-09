@@ -11,11 +11,11 @@ import java.util.ListIterator;
  *
  * @param <T> Type of collection
  */
-public class TypedList<T> extends TypedCollection<T> implements List<T> {
+class TypedList<T> extends TypedCollection<T> implements List<T> {
 
    // static's **************************************************************
    
-   public static class TypedListIterator<C> implements Typed<C>, ListIterator<C> {
+   static class TypedListIterator<C> implements Typed<C>, ListIterator<C> {
       private final ListIterator<C> iteratorDeleate ;
       private final Class<C> iteratorType ;
       
@@ -71,7 +71,7 @@ public class TypedList<T> extends TypedCollection<T> implements List<T> {
    
    // constructors **********************************************************
    
-   public TypedList(List<T> delegate, Class<T> type) {
+   TypedList(List<T> delegate, Class<T> type) {
       super(delegate,type);
       this.delegate = delegate;
    }

@@ -1,4 +1,4 @@
-package com.logicalpractice.collections;
+package com.logicalpractice.collections.typed;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.equalTo;
