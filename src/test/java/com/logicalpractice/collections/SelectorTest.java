@@ -1,10 +1,10 @@
 package com.logicalpractice.collections;
 
-import static com.logicalpractice.collections.CollectionFunctions.by;
-import static com.logicalpractice.collections.CollectionFunctions.collect;
-import static com.logicalpractice.collections.CollectionFunctions.from;
-import static com.logicalpractice.collections.CollectionFunctions.select;
-import static com.logicalpractice.collections.CollectionFunctions.where;
+import static com.logicalpractice.collections.Selector.by;
+import static com.logicalpractice.collections.Selector.collect;
+import static com.logicalpractice.collections.Selector.from;
+import static com.logicalpractice.collections.Selector.select;
+import static com.logicalpractice.collections.Selector.where;
 import static com.logicalpractice.collections.typed.TypedUtils.typedList;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.allOf;
@@ -27,7 +27,7 @@ import org.junit.Test;
 
 import com.logicalpractice.collections.support.MethodCapture;
 
-public class CollectionFunctionsTest {
+public class SelectorTest {
 
    List<Person> testData = Arrays.asList(new Person("Billy", "Smith", 8), new Person("Billy",
          "Jones", 32), new Person("James", "Smith", 70));

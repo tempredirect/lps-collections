@@ -29,7 +29,7 @@ import com.logicalpractice.collections.typed.Typed;
  * </p>
  * @author gareth
  */
-public class CollectionFunctions {
+public class Selector {
 
    private static final ThreadLocal<Iterable<?>> localItems = new ThreadLocal<Iterable<?>>();
 
@@ -123,7 +123,7 @@ public class CollectionFunctions {
     * </p>
     * 
     * <pre>
-    *    import static com.logicalpractice.collections.CollectionFunctions.* ;
+    *    import static com.logicalpractice.collections.Selector.* ;
     *    import static org.hamcrest.Matchers.* ;
     *    
     *    List&lt;Person&gt; output = select(from(listOfPeople).getLastName(), equalTo(&quot;Smith&quot;));
@@ -136,7 +136,7 @@ public class CollectionFunctions {
     * </p>
     * <p>
     * There are two ways of providing runtime type information to the
-    * CollectionFunctions, first is to supply a none empty list, the first
+    * Selector, first is to supply a none empty list, the first
     * element will be used as the prototype for CapturingProxy. An Alternative
     * is to use an implementation of {@link Typed}, Typed implementations of
     * the collection classes can be obtained with via
@@ -147,7 +147,7 @@ public class CollectionFunctions {
     * 
     * <pre>
     *    import static com.logicalpractice.collections.CollectionUtils.typed ;
-    *    import static com.logicalpractice.collections.CollectionFunctions.* ;
+    *    import static com.logicalpractice.collections.Selector.* ;
     *    import static org.hamcrest.Matchers.* ;
     *    
     *    List&lt;Person&gt; output = select(from(typed(listOfPeople,Person.class)).getLastName(), equalTo(&quot;Smith&quot;));
@@ -349,7 +349,7 @@ public class CollectionFunctions {
     * <p>
     * This method must obtain the runtime type of the contents of the Iterable.
     * There are two ways of providing runtime type information to the
-    * CollectionFunctions, first is to supply a none empty list, the first
+    * Selector, first is to supply a none empty list, the first
     * element will be used as the prototype for CapturingProxy. An Alternative
     * is to use an implementation of {@link Typed}, Typed implementations of
     * the collection classes can be obtained with via
