@@ -45,7 +45,7 @@ public class Selector {
     *           Type of the value used for the matcher
     * @param items
     *           None null instance of Iterable
-    * @param function
+    * @param transform
     *           None null instance of Function that excepts type T and returns a
     *           Value of type V
     * @param matcher
@@ -55,19 +55,12 @@ public class Selector {
     *         independant of the source items and that items will not be changed
     *         during this operation.
     */
-   public static <T, V> Iterable<T> select(Iterable<T> items, Function<T,V> function, Matcher<V> matcher) {
-      List<T> result = new LinkedList<T>();
-
-      for (T item : items) {
-         try {
-            if (matcher.matches(function.apply(item))) {
-               result.add(item);
-            }
-         } catch (Exception e) {
-            throw launderException(e);
-         }
-      }
-      return result;
+   public static <T, V> Iterable<T> select(Iterable<T> items, final Function<T,V> transform, final Matcher<V> matcher) {
+      return select(items, new Predicate<T>(){
+          public boolean apply(T input) {
+              return matcher.matches(transform.apply(input));
+          }
+      });
    }
 
    /**
@@ -149,7 +142,7 @@ public class Selector {
     * </p>
     * 
     * <pre>
-    *    import static com.logicalpractice.collections.CollectionUtils.typed ;
+    *    import static com.logicalpractice.collections.typed.TypedUtils#typed ;
     *    import static com.logicalpractice.collections.Selector.* ;
     *    import static org.hamcrest.Matchers.* ;
     *    

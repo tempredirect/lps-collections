@@ -21,6 +21,7 @@ import static org.junit.Assert.assertThat;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -168,6 +169,29 @@ public class SelectorTest {
         assertThat(result, not(nullValue()));
         assertThat(result, hasItems("Smith", "Jones"));
         assertThat(size(result), equalTo(3));
+    }
+
+    @Test
+    public void ensureSelectIsLazy(){
+        final AtomicInteger count = new AtomicInteger(0);
+        Iterable<Person> result = select(testData, new Predicate<Person>() {
+            public boolean apply(Person input) {
+                count.incrementAndGet();
+                return true;
+            }
+        });
+
+        Iterator<Person> it = result.iterator();
+
+        assertThat(count.get(),equalTo(0));
+
+        it.next();
+
+        assertThat(count.get(), equalTo(1));
+
+        it.next();
+
+        assertThat(count.get(), equalTo(2));
     }
 
     @After
