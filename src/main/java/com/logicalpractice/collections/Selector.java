@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.google.common.base.Function;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.Iterators;
@@ -160,11 +161,23 @@ public class Selector {
     }
 
     public static <T> Iterable<T> select(Iterable<T> items, final Matcher<T> matcher) {
-        return select(items, new Predicate<T>() {
+        return select(items, asPredicate(matcher));
+    }
+
+
+    /**
+     * Return a predicate that wraps the given matcher.
+     * @param matcher required matcher
+     * @param <T> type of the matcher and the resulting predicate
+     * @return none null instance Predicate
+     */
+    public static <T> Predicate<T> asPredicate(final Matcher<T> matcher) {
+        Preconditions.checkNotNull(matcher,"matcher is required");
+        return new Predicate<T>() {
             public boolean apply(T input) {
                 return matcher.matches(input);
             }
-        });
+        };
     }
 
     public static <T> Iterable<T> select(final Iterable<T> items, final Predicate<T> predicate) {
