@@ -367,8 +367,9 @@ public class Selector {
       return (CapturingProxy<F,V>) MethodCapture.clearAndReturn();
    }
 
+   // visible for testing only
    @SuppressWarnings("unchecked")
-   private static <T> Class<T> typeOfIterable(Iterable<T> items) {
+   static <T> Class<T> typeOfIterable(Iterable<T> items) {
       if (items instanceof Typed) {
          return ((Typed) items).type();
       }
