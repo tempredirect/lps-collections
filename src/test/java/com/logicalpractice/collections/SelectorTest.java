@@ -208,7 +208,6 @@ public class SelectorTest {
         assertThat(typeOfIterable(Arrays.asList("a","b","b")),equalTo(String.class));
     }
 
-
     @After
     public void clearAndReturn() {
         MethodCapture.clearAndReturn();
