@@ -1,5 +1,6 @@
 package com.logicalpractice.collections;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -347,7 +348,7 @@ public class Selector {
      * the collection classes can be obtained with via
      * </p>
      * <p>
-     * {@link MethodCapture.capture(cls)} provides the proxy and it in turn uses
+     * {@link com.logicalpractice.collections.support.MethodCapture#capture(Class)} provides the proxy and it in turn uses
      * CGLIB to implement it. There are some rescitions to the use of
      * MethodCapture please refer it's documentation for more information.
      * </p>
@@ -368,12 +369,25 @@ public class Selector {
         return (CapturingProxy<F, V>) MethodCapture.clearAndReturn();
     }
 
-    // visible for testing only
 
+    // visible for testing only
     @SuppressWarnings("unchecked")
     static <T> Class<T> typeOfIterable(Iterable<T> items) {
         if (items instanceof Typed) {
             return ((Typed) items).type();
+        }
+
+        if( items.getClass().getName().startsWith("java.util.Collections$Checked")){
+            // attempt to find the 'type' field
+            try {
+                Field type = items.getClass().getDeclaredField("type");
+                type.setAccessible(true);
+                return (Class<T>)type.get(items);
+            } catch (NoSuchFieldException e) {
+                // ignore ... must be mistaken
+            } catch (IllegalAccessException e) {
+                // damn security
+            }
         }
 
         Iterator<T> it = items.iterator();

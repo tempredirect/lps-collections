@@ -2,11 +2,7 @@ package com.logicalpractice.collections;
 
 import static com.google.common.collect.Iterables.size;
 import static com.google.common.collect.Lists.newArrayList;
-import static com.logicalpractice.collections.Selector.by;
-import static com.logicalpractice.collections.Selector.collect;
-import static com.logicalpractice.collections.Selector.from;
-import static com.logicalpractice.collections.Selector.select;
-import static com.logicalpractice.collections.Selector.where;
+import static com.logicalpractice.collections.Selector.*;
 import static com.logicalpractice.collections.typed.TypedUtils.typedList;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.allOf;
@@ -19,15 +15,13 @@ import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.logicalpractice.collections.typed.TypedUtils;
 import org.junit.After;
 import org.junit.Test;
 
@@ -193,6 +187,27 @@ public class SelectorTest {
 
         assertThat(count.get(), equalTo(2));
     }
+
+    @Test
+    public void typeOfIterableTypedList(){
+        assertThat(typeOfIterable(TypedUtils.typedList(Arrays.asList("a","b","b"),String.class)),equalTo(String.class));
+    }
+
+    @Test
+    public void typeOfIterablePopulatedCheckedList(){
+        assertThat(typeOfIterable(Collections.checkedList(Arrays.asList("a","b","b"),String.class)),equalTo(String.class));
+    }
+
+    @Test
+    public void typeOfIterableEmptyCheckedList(){
+        assertThat(typeOfIterable(Collections.checkedList(new ArrayList<String>(),String.class)),equalTo(String.class));
+    }
+    
+    @Test
+    public void typeOfIterablePopulatedList(){
+        assertThat(typeOfIterable(Arrays.asList("a","b","b")),equalTo(String.class));
+    }
+
 
     @After
     public void clearAndReturn() {
