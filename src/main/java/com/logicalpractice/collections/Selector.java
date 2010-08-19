@@ -2,9 +2,7 @@ package com.logicalpractice.collections;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
@@ -37,6 +35,20 @@ import com.logicalpractice.collections.typed.Typed;
 public class Selector {
 
     private static final ThreadLocal<Iterable<?>> localItems = new ThreadLocal<Iterable<?>>();
+
+    private static Field checkedCollectionTypeField;
+
+    static {
+        Collection<String> tmp = Collections.checkedCollection(new ArrayList<String>(1),String.class);
+        try {
+            checkedCollectionTypeField = tmp.getClass().getDeclaredField("type");
+            checkedCollectionTypeField.setAccessible(true);
+        } catch (SecurityException e){
+            //ignore
+        } catch (NoSuchFieldException e) {
+            //ignore
+        }
+    }
 
     /**
      * Select matching items from Iterable items by evalulating the Function object
@@ -377,16 +389,12 @@ public class Selector {
             return ((Typed) items).type();
         }
 
-        if( items.getClass().getName().startsWith("java.util.Collections$Checked")){
-            // attempt to find the 'type' field
+        if( checkedCollectionsReflectionEnabled()
+                && items.getClass().getName().startsWith("java.util.Collections$Checked")){
             try {
-                Field type = items.getClass().getDeclaredField("type");
-                type.setAccessible(true);
-                return (Class<T>)type.get(items);
-            } catch (NoSuchFieldException e) {
-                // ignore ... must be mistaken
+                return (Class<T>)checkedCollectionTypeField.get(items);
             } catch (IllegalAccessException e) {
-                // damn security
+                // ignore
             }
         }
 
@@ -397,6 +405,14 @@ public class Selector {
         }
 
         return (Class<T>) it.next().getClass();
+    }
+
+    /**
+     * @return true if the {@code Selector} is enable to snif the type of
+     *              collections sourced from {@code Collections.checked*}
+     */
+    public static boolean checkedCollectionsReflectionEnabled() {
+        return checkedCollectionTypeField != null;
     }
 
     private static RuntimeException launderException(Exception e) {
