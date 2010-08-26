@@ -21,8 +21,9 @@
 	</licenses>
 
 	<scm>
-		<connection>scm:svn:https://logicalpractice-collections.googlecode.com/svn/trunk</connection>
+		<connection>scm:hg:file://${basedir}</connection>
 	</scm>
+
 	<distributionManagement>
 		<repository>
 			<id>googlecode</id>
@@ -60,13 +61,6 @@
 				</executions>
 			</plugin>
 		</plugins>
-<!--		<extensions>
-			<extension>
-				<groupId>org.jvnet.wagon-svn</groupId>
-				<artifactId>wagon-svn</artifactId>
-				<version>1.8</version>
-			</extension>
-		</extensions>		-->
 	    <extensions>
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
@@ -138,7 +132,6 @@
         					</execution>
         				</executions>
         			</plugin>
-	               
 	            </plugins>
             </build>
         </profile>
