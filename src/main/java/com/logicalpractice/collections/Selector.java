@@ -173,7 +173,7 @@ public class Selector {
     }
 
     public static <T> Iterable<T> select(Iterable<T> items, final Matcher<T> matcher) {
-        return select(items, toPredicate(matcher));
+        return select(items, is(matcher));
     }
 
 
@@ -183,7 +183,7 @@ public class Selector {
      * @param <T> type of the matcher and the resulting predicate
      * @return none null instance Predicate
      */
-    public static <T> Predicate<T> toPredicate(final Matcher<T> matcher) {
+    public static <T> Predicate<T> is(final Matcher<T> matcher) {
         Preconditions.checkNotNull(matcher,"matcher is required");
         return new Predicate<T>() {
             public boolean apply(T input) {
